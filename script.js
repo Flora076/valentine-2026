@@ -61,46 +61,37 @@ window.addEventListener('DOMContentLoaded', () => {
     // Set texts from config
     document.getElementById('valentineTitle').textContent = `Mi Amor ${config.valentineName}`;
     
-    // Set first question texts
- const question1Text = document.getElementById('question1Text');
+    // --- First Question ---
+    const question1Text = document.getElementById('question1Text');
     question1Text.textContent = config.questions.first.text;
 
     const yesBtn1 = document.getElementById('yesBtn1');
     yesBtn1.textContent = config.questions.first.yesBtn;
-    yesBtn1.onclick = () => showNextQuestion(2); // Go to question 2
+    yesBtn1.onclick = () => showNextQuestion(2); 
     
-    
-   // --- Second Question ---
+    // --- Second Question ---
     const question2Text = document.getElementById('question2Text');
     question2Text.textContent = config.questions.second.text;
 
     const yesBtn2 = document.getElementById('yesBtn2');
-   startText.textContent = config.questions.second.yesBtn;
-    startText.onclick = celebrate; // Yes triggers celebration
+    yesBtn2.textContent = config.questions.second.yesBtn; // Fixed variable name
+    yesBtn2.onclick = celebrate; 
 
     const noBtn2 = document.getElementById('noBtn2');
     noBtn2.textContent = config.questions.second.noBtn;
-    makeButtonRunAway(noBtn2); // No runs away
+    makeButtonRunAway(noBtn2); // Attach runaway behavior
 
     // Create initial floating elements
     createFloatingElements();
-    
-// Attach runaway behavior ONLY to question 2 "No"
- const noBtn2 = document.getElementById('noBtn2');
-makeButtonRunAway(noBtn2);
-
 });
-
 
 // Floating Hearts - Non-blocking
 function createFloatingElements() {
     const container = document.querySelector('.floating-elements');
     if (!container) return;
 
-    // Clear any existing hearts
     container.innerHTML = '';
 
-    // Create floating hearts
     config.floatingEmojis.hearts.forEach(heart => {
         const div = document.createElement('div');
         div.className = 'floating-heart';
@@ -116,24 +107,19 @@ function setRandomPosition(element) {
     element.style.left = Math.random() * 100 + 'vw';
     element.style.top = Math.random() * 100 + 'vh';
 
-    // Random floating speed
-    const duration = 5 + Math.random() * 10; // 5s to 15s
+    const duration = 5 + Math.random() * 10; 
     element.style.animation = `floatUp ${duration}s linear infinite`;
-
-    // Prevent blocking buttons
     element.style.pointerEvents = 'none';
 }
-
-
 
 // Function to show next question
 function showNextQuestion(questionNumber) {
     document.querySelectorAll('.question-section').forEach(q => q.classList.add('hidden'));
-    document.getElementById(`question${questionNumber}`).classList.remove('hidden');
+    const nextQ = document.getElementById(`question${questionNumber}`);
+    if (nextQ) nextQ.classList.remove('hidden');
 }
 
-
-// make no button run away
+// Make no button run away
 function makeButtonRunAway(button) {
     if (!button) return;
 
@@ -146,14 +132,13 @@ function makeButtonRunAway(button) {
         const dy = e.clientY - btnY;
         const distance = Math.sqrt(dx*dx + dy*dy);
 
-        if (distance < 150) { // how close the mouse triggers the move
+        if (distance < 150) { 
             let moveX = -dx * 0.8;
             let moveY = -dy * 0.8;
 
             let newLeft = rect.left + moveX;
             let newTop = rect.top + moveY;
 
-            // Keep inside window bounds
             newLeft = Math.max(0, Math.min(window.innerWidth - rect.width, newLeft));
             newTop = Math.max(0, Math.min(window.innerHeight - rect.height, newTop));
 
@@ -164,73 +149,30 @@ function makeButtonRunAway(button) {
     });
 }
 
-
 // Celebration function
 function celebrate() {
     document.querySelectorAll('.question-section').forEach(q => q.classList.add('hidden'));
     const celebration = document.getElementById('celebration');
     celebration.classList.remove('hidden');
     
-    // Set celebration messages
     document.getElementById('celebrationTitle').textContent = config.celebration.title;
     document.getElementById('celebrationMessage').textContent = config.celebration.message;
     document.getElementById('celebrationEmojis').textContent = config.celebration.emojis;
     
-    // Create heart explosion effect
     createHeartExplosion();
 }
 
 // Create heart explosion animation
 function createHeartExplosion() {
+    const container = document.querySelector('.floating-elements');
+    if (!container) return;
+
     for (let i = 0; i < 50; i++) {
         const heart = document.createElement('div');
         const randomHeart = config.floatingEmojis.hearts[Math.floor(Math.random() * config.floatingEmojis.hearts.length)];
         heart.innerHTML = randomHeart;
         heart.className = 'heart';
-        document.querySelector('.floating-elements').appendChild(heart);
+        container.appendChild(heart);
         setRandomPosition(heart);
     }
 }
-
-// Music Player Setup
-function setupMusicPlayer() {
-    const musicControls = document.getElementById('musicControls');
-    const musicToggle = document.getElementById('musicToggle');
-    const bgMusic = document.getElementById('bgMusic');
-    const musicSource = document.getElementById('musicSource');
-
-    // Only show controls if music is enabled in config
-    if (!config.music.enabled) {
-        musicControls.style.display = 'none';
-        return;
-    }
-    
-    
-    // Set music source and volume
-    musicSource.src = config.music.musicUrl;
-    bgMusic.volume = config.music.volume || 0.5;
-    bgMusic.load();
-
-    // Try autoplay if enabled
-    if (config.music.autoplay) {
-        const playPromise = bgMusic.play();
-        if (playPromise !== undefined) {
-            playPromise.catch(error => {
-                console.log("Autoplay prevented by browser");
-                musicToggle.textContent = config.music.startText;
-            });
-        }
-    }
-
-    // Toggle music on button click
-    musicToggle.addEventListener('click', () => {
-        if (bgMusic.paused) {
-            bgMusic.play();
-            musicToggle.textContent = config.music.stopText;
-        } else {
-            bgMusic.pause();
-            musicToggle.textContent = config.music.startText;
-        }
-    });
-} 
-
