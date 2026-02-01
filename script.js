@@ -64,7 +64,7 @@ window.addEventListener('DOMContentLoaded', () => {
     // Set first question texts
     document.getElementById('question1Text').textContent = config.questions.first.text;
     document.getElementById('yesBtn1').textContent = config.questions.first.yesBtn1;
-    document.getElementById('noBtn1').textContent = config.questions.first.noBtn1;
+
 
     
     // Set second question texts
