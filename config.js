@@ -27,7 +27,7 @@ const CONFIG = {
 
         second: {
             text: "Will you be my Valentine on February 14th? 🌹", // The big question!
-            startText: "Yes!",                                             // Text for "Yes" button
+            yesBtn2: "Yes!",                                             // Text for "Yes" button
             noBtn2: "No"                                                 // Text for "No" button
         }
     },
