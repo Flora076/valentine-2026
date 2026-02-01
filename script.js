@@ -79,8 +79,9 @@ window.addEventListener('DOMContentLoaded', () => {
     setupMusicPlayer();
 
 // Attach runaway behavior ONLY to question 2 "No"
-    const noBtn2 = document.getElementById('noBtn2');
-    if (noBtn2) makeButtonRunAway(noBtn2);
+ const noBtn2 = document.getElementById('noBtn2');
+makeButtonRunAway(noBtn2);
+
 });
 
 
