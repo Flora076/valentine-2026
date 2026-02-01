@@ -157,13 +157,33 @@ function celebrate() {
     createHeartExplosion();
 }
 
+
 function createHeartExplosion() {
+    const container = document.querySelector('.floating-elements');
     for (let i = 0; i < 50; i++) {
         const heart = document.createElement('div');
-        const randomHeart = config.floatingEmojis.hearts[Math.floor(Math.random() * config.floatingEmojis.hearts.length)];
-        heart.innerHTML = randomHeart;
-        heart.className = 'floating-heart'; // Reusing class for consistency
-        document.querySelector('.floating-elements').appendChild(heart);
-        setRandomPosition(heart);
+        heart.innerHTML = config.floatingEmojis.hearts[Math.floor(Math.random() * config.floatingEmojis.hearts.length)];
+        heart.className = 'floating-heart';
+        
+        // Start at center for explosion effect
+        heart.style.position = 'fixed';
+        heart.style.left = '50%';
+        heart.style.top = '50%';
+        container.appendChild(heart);
+
+        const angle = Math.random() * Math.PI * 2;
+        const velocity = 150 + Math.random() * 350;
+        const x = Math.cos(angle) * velocity;
+        const y = Math.sin(angle) * velocity;
+
+        heart.animate([
+            { transform: 'translate(-50%, -50%) scale(0)', opacity: 1 },
+            { transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(${config.animations.heartExplosionSize})`, opacity: 0 }
+        ], {
+            duration: 1200,
+            easing: 'ease-out'
+        });
+
+        setTimeout(() => heart.remove(), 1200);
     }
 }
