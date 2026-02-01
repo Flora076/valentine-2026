@@ -126,7 +126,7 @@ function makeButtonRunAway(button) {
         const dy = e.clientY - btnY;
         const distance = Math.sqrt(dx * dx + dy * dy);
 
-        if (distance < 120) {
+        if (distance < 120) { // pixels
             const moveX = -dx * 0.8;
             const moveY = -dy * 0.8;
 
@@ -141,7 +141,8 @@ function makeButtonRunAway(button) {
             button.style.left = `${newLeft}px`;
             button.style.top = `${newTop}px`;
         }
-}}
+    });
+}
 
 
 // Celebration function
