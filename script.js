@@ -92,30 +92,170 @@ function showNextQuestion(questionNumber) {
 function makeButtonRunAway(button) {
     if (!button) return;
 
+    const taunts = [
+        "Nope! 😏",
+        "Too slow! 🐢",
+        "Can't touch this 💃",
+        "Not today! ✨",
+        "Try again 😘",
+        "Almost had me! 🪺",
+    ];
+
+    let tauntIndex = 0;
+    let isRunning = false;
+
+    function teleportAway(cursorX, cursorY) {
+        const bw = button.offsetWidth;
+        const bh = button.offsetHeight;
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        const margin = 40;
+
+        // Pick a random position that's far from the cursor
+        let newLeft, newTop;
+        let attempts = 0;
+        do {
+            newLeft = margin + Math.random() * (vw - bw - margin * 2);
+            newTop = margin + Math.random() * (vh - bh - margin * 2);
+            attempts++;
+        } while (
+            Math.hypot(cursorX - newLeft, cursorY - newTop) < 250 &&
+            attempts < 20
+        );
+
+        button.style.position = 'fixed';
+        button.style.zIndex = '1000';
+        button.style.transition = 'none';
+        button.style.left = `${newLeft}px`;
+        button.style.top = `${newTop}px`;
+
+        // Little pop-in animation
+        button.style.transform = 'scale(0)';
+        requestAnimationFrame(() => {
+            button.style.transition = 'transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            button.style.transform = 'scale(1)';
+        });
+
+        // Occasionally swap the button text to a taunt, then swap back
+        if (Math.random() < 0.4) {
+            const original = button.textContent;
+            button.textContent = taunts[tauntIndex % taunts.length];
+            tauntIndex++;
+            setTimeout(() => { button.textContent = original; }, 700);
+        }
+    }
+
+    function isNearEdge(rect) {
+        const edgeMargin = 80;
+        return (
+            rect.left < edgeMargin ||
+            rect.top < edgeMargin ||
+            rect.right > window.innerWidth - edgeMargin ||
+            rect.bottom > window.innerHeight - edgeMargin
+        );
+    }
+
     document.addEventListener('mousemove', (e) => {
+        if (isRunning) return;
+
         const rect = button.getBoundingClientRect();
         const btnX = rect.left + rect.width / 2;
         const btnY = rect.top + rect.height / 2;
 
         const dx = e.clientX - btnX;
         const dy = e.clientY - btnY;
-        const distance = Math.sqrt(dx*dx + dy*dy);
+        const distance = Math.hypot(dx, dy);
 
-        if (distance < 150) { 
-            let moveX = -dx * 0.8;
-            let moveY = -dy * 0.8;
+        if (distance < 160) {
+            // If button is near any edge, teleport to avoid getting cornered
+            if (isNearEdge(rect)) {
+                isRunning = true;
+                teleportAway(e.clientX, e.clientY);
+                setTimeout(() => { isRunning = false; }, 250);
+                return;
+            }
+
+            // Normal flee: move away from cursor
+            let moveX = -dx * 1.2;
+            let moveY = -dy * 1.2;
+
+            // Add some random perpendicular jitter so movement isn't predictable
+            const perp = (Math.random() - 0.5) * 120;
+            const len = Math.hypot(moveX, moveY) || 1;
+            moveX += (-dy / len) * perp;
+            moveY += (dx / len) * perp;
 
             let newLeft = rect.left + moveX;
             let newTop = rect.top + moveY;
 
-            newLeft = Math.max(0, Math.min(window.innerWidth - rect.width, newLeft));
-            newTop = Math.max(0, Math.min(window.innerHeight - rect.height, newTop));
+            // Clamp to viewport
+            newLeft = Math.max(20, Math.min(window.innerWidth - rect.width - 20, newLeft));
+            newTop = Math.max(20, Math.min(window.innerHeight - rect.height - 20, newTop));
 
             button.style.position = 'fixed';
+            button.style.transition = 'left 0.15s ease-out, top 0.15s ease-out';
             button.style.left = `${newLeft}px`;
             button.style.top = `${newTop}px`;
             button.style.zIndex = '1000';
         }
+    });
+
+    // Touch support — teleport immediately on approach
+    document.addEventListener('touchmove', (e) => {
+        if (isRunning) return;
+        const touch = e.touches[0];
+        const rect = button.getBoundingClientRect();
+        const btnX = rect.left + rect.width / 2;
+        const btnY = rect.top + rect.height / 2;
+        if (Math.hypot(touch.clientX - btnX, touch.clientY - btnY) < 120) {
+            isRunning = true;
+            teleportAway(touch.clientX, touch.clientY);
+            setTimeout(() => { isRunning = false; }, 300);
+        }
+    }, { passive: true });
+
+    // "Nice try!" handler — for the clever ones who pause JS or tab-focus
+    button.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Float a message from the button's position
+        const rect = button.getBoundingClientRect();
+        const msg = document.createElement('div');
+        msg.textContent = 'Nice try! 😉';
+        Object.assign(msg.style, {
+            position: 'fixed',
+            left: `${rect.left + rect.width / 2}px`,
+            top: `${rect.top}px`,
+            transform: 'translate(-50%, -100%)',
+            background: 'rgba(0,0,0,0.8)',
+            color: '#fff',
+            padding: '10px 20px',
+            borderRadius: '20px',
+            fontSize: '1.2rem',
+            fontWeight: 'bold',
+            zIndex: '9999',
+            pointerEvents: 'none',
+            whiteSpace: 'nowrap',
+        });
+        document.body.appendChild(msg);
+
+        // Animate message floating up and fading
+        msg.animate([
+            { opacity: 1, transform: 'translate(-50%, -100%)' },
+            { opacity: 0, transform: 'translate(-50%, -300%)' },
+        ], { duration: 1500, easing: 'ease-out' });
+
+        // Button shrinks and vanishes
+        button.animate([
+            { transform: 'scale(1) rotate(0deg)', opacity: 1 },
+            { transform: 'scale(0) rotate(720deg)', opacity: 0 },
+        ], { duration: 600, easing: 'ease-in' });
+
+        setTimeout(() => {
+            button.style.display = 'none';
+            msg.remove();
+        }, 1500);
     });
 }
 
