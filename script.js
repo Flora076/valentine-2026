@@ -71,18 +71,17 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('question2Text').textContent = config.questions.second.text;
     document.getElementById('startText').textContent = config.questions.second.startText;
     document.getElementById('noBtn2').textContent = config.questions.second.noBtn;
-;
 
     // Create initial floating elements
     createFloatingElements();
 
     // Setup music player
     setupMusicPlayer();
-});
 
 // Attach runaway behavior ONLY to question 2 "No"
    const noBtn2 = document.getElementById('noBtn2');
     makeButtonRunAway(noBtn2);
+
 });
 
 // Create floating hearts and bears
@@ -186,8 +185,7 @@ function setupMusicPlayer() {
         return;
     }
     
-const noBtn = document.getElementById('noBtn1');
-makeButtonRunAway(noBtn);
+
     
     // Set music source and volume
     musicSource.src = config.music.musicUrl;
