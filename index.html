@@ -30,18 +30,19 @@
         </div>
 
         <!-- First Question -->
-        <div class="question-section" id="question1">
-        <h2 id="question1Text"></h2>
-        <button class="cute-btn" id="yesBtn1"></button>
-        <button class="cute-btn" id="noBtn1"></button>
-        </div>
+<div class="question-section" id="question1">
+    <h2 id="question1Text"></h2>
+    <button class="cute-btn" id="yesBtn1" onclick="showNextQuestion(2)"></button>
+    <button class="cute-btn" id="noBtn1" onclick="moveButton(this)"></button>
+</div>
 
-        <!-- Second Question (Love Meter) -->
-      <div class="question-section hidden" id="question2">
-        <h2 id="question2Text"></h2>
-        <button class="cute-btn" id="startText"></button> <!-- Yes button -->
-        <button class="cute-btn" id="noBtn2"></button>   <!-- No button runs away -->
-    </div>
+<!-- Second Question -->
+<div class="question-section hidden" id="question2">
+    <h2 id="question2Text"></h2>
+    <button class="cute-btn" id="startText" onclick="showNextQuestion(3)"></button> <!-- Yes button -->
+    <button class="cute-btn" id="noBtn2"></button>   <!-- No button runs away -->
+</div>
+
 
         <!-- CUSTOMIZE: Celebration message -->
         <div class="celebration hidden" id="celebration">
