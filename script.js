@@ -79,10 +79,10 @@ window.addEventListener('DOMContentLoaded', () => {
     setupMusicPlayer();
 
 // Attach runaway behavior ONLY to question 2 "No"
-   const noBtn2 = document.getElementById('noBtn2');
-    makeButtonRunAway(noBtn2);
-
+    const noBtn2 = document.getElementById('noBtn2');
+    if (noBtn2) makeButtonRunAway(noBtn2);
 });
+
 
 // Create floating hearts and bears
 function createFloatingElements() {
@@ -141,7 +141,6 @@ function makeButtonRunAway(button) {
             button.style.left = `${newLeft}px`;
             button.style.top = `${newTop}px`;
         }
-    });
 }
 
 
@@ -185,7 +184,6 @@ function setupMusicPlayer() {
         return;
     }
     
-
     
     // Set music source and volume
     musicSource.src = config.music.musicUrl;
