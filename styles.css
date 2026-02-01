@@ -1,115 +1,86 @@
-/* CSS Variables - Synchronized with Green Theme */
 :root {
-    /* Colors from your JavaScript */
-    --background-color-1: #308a58; /* Forest Green */
-    --background-color-2: #487d60; /* Sage Green */
-    --button-color: #3aab2b;       /* Vibrant Green */
-    --button-hover: #317a52;       /* Deep Green */
-    --text-color: #10de6c;         /* Bright Lime */
-
-    /* Animations */
-    --float-duration: 15s;
-    --float-distance: 50px;
-    --bounce-speed: 0.5s;
-    --heart-explosion-size: 1.5;
+    --background-color-1: #308a58;
+    --background-color-2: #487d60;
+    --button-color: #3aab2b;
+    --button-hover: #317a52;
+    --text-on-btn: #ffffff; /* White text for clarity */
 }
 
 body {
     margin: 0;
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     background: linear-gradient(135deg, var(--background-color-1), var(--background-color-2));
-    font-family: 'Poppins', Arial, sans-serif;
-    overflow: hidden; /* Keeps floating hearts from creating scrollbars */
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
 }
 
+/* 1. Ensure container is on TOP of everything */
 .container {
+    position: relative;
+    z-index: 999; 
     background: rgba(255, 255, 255, 0.95);
-    padding: 2.5rem;
-    border-radius: 25px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    border-radius: 20px;
     text-align: center;
-    max-width: 500px;
-    width: 90%;
-    z-index: 10;
-    border: 3px solid var(--button-color);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    border: 4px solid var(--button-color);
 }
 
-/* Floating Elements (Background) */
+/* 2. Style buttons to be super clear */
+.cute-btn {
+    background-color: var(--button-color) !important;
+    color: var(--text-on-btn) !important;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    margin: 10px;
+    transition: all 0.2s ease;
+    display: inline-block;
+    box-shadow: 0 4px 0px #256d1c; /* Darker green "3D" effect */
+}
+
+.cute-btn:hover {
+    transform: scale(1.1);
+    background-color: var(--button-hover) !important;
+}
+
+/* 3. Fix floating elements */
 .floating-elements {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none;
-    z-index: 1;
+    z-index: 1; /* Behind the container */
+    pointer-events: none; /* Allows you to click through them */
 }
 
-.floating-heart, .heart {
-    position: absolute;
+.floating-heart {
+    position: absolute; /* REQUIRED for movement */
     font-size: 2rem;
-    animation: float var(--float-duration) linear infinite;
-    opacity: 0.8;
     user-select: none;
 }
 
-@keyframes float {
-    0% { transform: translateY(100vh) translateX(0); }
-    100% { transform: translateY(-100px) translateX(var(--float-distance)); }
-}
-
-/* Button Styling */
-.cute-btn {
-    background: var(--button-color);
-    border: none;
-    padding: 12px 28px;
-    margin: 10px;
-    border-radius: 50px;
-    color: white;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(58, 171, 43, 0.3);
-}
-
-.cute-btn:hover {
-    transform: scale(1.1) translateY(-2px);
-    background: var(--button-hover);
-    box-shadow: 0 6px 20px rgba(49, 122, 82, 0.4);
-}
-
-/* Utility Classes */
-.hidden {
-    display: none !important;
-}
-
-/* Text Elements */
-h1 {
-    color: var(--button-hover);
-    margin-bottom: 1.5rem;
-    font-size: 2.2rem;
-}
-
-h2 {
-    color: var(--background-color-1);
-    margin-bottom: 1.2rem;
-}
-
-/* Celebration Screen */
-.celebration-text {
-    font-size: 2.2em;
-    color: var(--button-color);
-    font-weight: bold;
-    margin: 20px 0;
-    animation: bounce var(--bounce-speed) infinite alternate;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-@keyframes bounce {
-    from { transform: scale(1); }
-    to { transform: scale(1.08); }
+/* The animation name must match the JS string exactly */
+@keyframes floatUp {
+    0% {
+        transform: translateY(110vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-20vh) rotate(360deg);
+        opacity: 0;
+    }
 }
