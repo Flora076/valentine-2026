@@ -141,7 +141,7 @@ function makeButtonRunAway(button) {
             button.style.left = `${newLeft}px`;
             button.style.top = `${newTop}px`;
         }
-}
+}}
 
 
 // Celebration function
