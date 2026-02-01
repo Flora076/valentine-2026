@@ -3,62 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- CUSTOMIZE: Browser tab title -->
     <title>Will You Be My Valentine? 💝</title>
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Floating Background Elements -->
-    <div class="floating-elements">
+    <div class="floating-elements"></div>
 
-        .floating-elements {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none; /* Hearts won’t block clicks */
-    z-index: 0;
-}
-
-.floating-heart {
-    font-size: 24px;
-    pointer-events: none; /* extra safety */
-    user-select: none;
-}
-
-/* Floating animation */
-@keyframes floatUp {
-    0% { transform: translateY(0); opacity: 1; }
-    50% { opacity: 0.7; }
-    100% { transform: translateY(-100vh); opacity: 0; }
-}
-
-    </div>
-
-    <!-- Main Content Container -->
     <div class="container">
         <h1 id="valentineTitle"></h1>
 
-        
- <!-- First Question -->
- <div class="question-section" id="question1">
-        <h2 id="question1Text"></h2>
-        <button class="cute-btn" id="yesBtn1"></button> <!-- Only Yes button -->
-</div>
+        <div class="question-section" id="question1">
+            <h2 id="question1Text"></h2>
+            <button class="cute-btn" id="yesBtn1"></button>
+        </div>
 
-<!-- Second Question -->
-<div class="question-section hidden" id="question2">
-    <h2 id="question2Text"></h2>
-    <button class="cute-btn" id="startText" onclick="celebrate()"></button> <!-- Yes button -->
-    <button class="cute-btn" id="noBtn2"></button> <!-- No button runs away -->
-</div>
+        <div class="question-section hidden" id="question2">
+            <h2 id="question2Text"></h2>
+            <button class="cute-btn" id="yesBtn2"></button> 
+            <button class="cute-btn" id="noBtn2"></button>
+        </div>
 
-
-        <!-- CUSTOMIZE: Celebration message -->
         <div class="celebration hidden" id="celebration">
             <h2 id="celebrationTitle"></h2>
             <p class="celebration-text" id="celebrationMessage"></p>
@@ -66,9 +31,8 @@
         </div>
     </div>
 
-    <!-- Scripts -->
     <script src="config.js"></script>
     <script src="script.js"></script>
     <script src="theme.js"></script>
 </body>
-</html> 
+</html>
