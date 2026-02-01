@@ -64,8 +64,9 @@ window.addEventListener('DOMContentLoaded', () => {
     // Set first question texts
     document.getElementById('question1Text').textContent = config.questions.first.text;
     document.getElementById('yesBtn1').textContent = config.questions.first.yesBtn1;
-
-
+ yesBtn1.textContent = config.questions.first.yesBtn;
+    yesBtn1.onclick = () => showNextQuestion(2);
+    
     
     // Set second question texts
     document.getElementById('question2Text').textContent = config.questions.second.text;
