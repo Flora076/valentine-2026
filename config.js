@@ -23,7 +23,6 @@ const CONFIG = {
         first: {
             text: "Do you looveee me?",                                    // First interaction
             yesBtn1: "Yes",                                             // Text for "Yes" button
-            noBtn1: "No",                                               // Text for "No" button
         },
 
         second: {
@@ -37,7 +36,7 @@ const CONFIG = {
     // Messages that appear after they say "Yes!"
     celebration: {
         title: "Woohoo, but I wasn't taking no as an answer anyway",
-        message: "You can now get a big hug and kissies!",
+        message: "You can now get a big hug and kissies!❤️‍🔥🫦",
       
     },
 
