@@ -62,16 +62,25 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('valentineTitle').textContent = `Mi Amor ${config.valentineName}`;
     
     // Set first question texts
-    document.getElementById('question1Text').textContent = config.questions.first.text;
-    document.getElementById('yesBtn1').textContent = config.questions.first.yesBtn1;
- yesBtn1.textContent = config.questions.first.yesBtn;
-    yesBtn1.onclick = () => showNextQuestion(2);
+ const question1Text = document.getElementById('question1Text');
+    question1Text.textContent = config.questions.first.text;
+
+    const yesBtn1 = document.getElementById('yesBtn1');
+    yesBtn1.textContent = config.questions.first.yesBtn;
+    yesBtn1.onclick = () => showNextQuestion(2); // Go to question 2
     
     
-    // Set second question texts
-    document.getElementById('question2Text').textContent = config.questions.second.text;
-    document.getElementById('startText').textContent = config.questions.second.startText;
-    document.getElementById('noBtn2').textContent = config.questions.second.noBtn2;
+   // --- Second Question ---
+    const question2Text = document.getElementById('question2Text');
+    question2Text.textContent = config.questions.second.text;
+
+    const yesBtn2 = document.getElementById('yesBtn2');
+   startText.textContent = config.questions.second.yesBtn;
+    startText.onclick = celebrate; // Yes triggers celebration
+
+    const noBtn2 = document.getElementById('noBtn2');
+    noBtn2.textContent = config.questions.second.noBtn;
+    makeButtonRunAway(noBtn2); // No runs away
 
     // Create initial floating elements
     createFloatingElements();
