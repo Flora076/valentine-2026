@@ -27,7 +27,7 @@ const CONFIG = {
             secretAnswer: "I don't like you, I love you! ❤️"           // Secret hover message
         },
 
-        third: {
+        second: {
             text: "Will you be my Valentine on February 14th? 🌹", // The big question!
             yesBtn: "Yes!",                                             // Text for "Yes" button
             noBtn: "No"                                                 // Text for "No" button
@@ -46,7 +46,7 @@ const CONFIG = {
     celebration: {
         title: "Woohoo, but I wasn't taking no as an answer anyway",
         message: "You can now get a big hug and kissies!",
-        emojis: "🎁💖🤗💝💋❤️💕"  // These will bounce around
+      
     },
 
     // Color scheme for the website
