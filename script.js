@@ -91,28 +91,41 @@ makeButtonRunAway(noBtn2);
 });
 
 
-// Create floating hearts and bears
+// Floating Hearts - Non-blocking
 function createFloatingElements() {
     const container = document.querySelector('.floating-elements');
-    
-    // Create hearts
+    if (!container) return;
+
+    // Clear any existing hearts
+    container.innerHTML = '';
+
+    // Create floating hearts
     config.floatingEmojis.hearts.forEach(heart => {
         const div = document.createElement('div');
-        div.className = 'heart';
-        div.innerHTML = heart;
+        div.className = 'floating-heart';
+        div.textContent = heart;
         setRandomPosition(div);
         container.appendChild(div);
     });
-
-
 }
 
-// Set random position for floating elements
+// Randomize position and animation for each heart
 function setRandomPosition(element) {
+    element.style.position = 'absolute';
     element.style.left = Math.random() * 100 + 'vw';
-    element.style.animationDelay = Math.random() * 5 + 's';
-    element.style.animationDuration = 10 + Math.random() * 20 + 's';
+    element.style.top = Math.random() * 100 + 'vh';
+
+    // Random floating speed
+    const duration = 5 + Math.random() * 10; // 5s to 15s
+    element.style.animation = `floatUp ${duration}s linear infinite`;
+
+    // Prevent blocking buttons
+    element.style.pointerEvents = 'none';
 }
+
+// Initialize hearts after DOM is loaded
+window.addEventListener('DOMContentLoaded', createFloatingElements);
+
 
 // Function to show next question
 function showNextQuestion(questionNumber) {
