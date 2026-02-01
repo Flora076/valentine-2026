@@ -74,14 +74,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Create initial floating elements
     createFloatingElements();
-    .floating-elements {
-    pointer-events: none; /* lets clicks pass through everything inside */
-    position: fixed;       /* so hearts float independently */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;            /* behind the buttons */
+
 }
 
 
