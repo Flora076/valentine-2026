@@ -74,9 +74,16 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Create initial floating elements
     createFloatingElements();
+    .floating-elements {
+    pointer-events: none; /* lets clicks pass through everything inside */
+    position: fixed;       /* so hearts float independently */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;            /* behind the buttons */
+}
 
-    // Setup music player
-    setupMusicPlayer();
 
 // Attach runaway behavior ONLY to question 2 "No"
  const noBtn2 = document.getElementById('noBtn2');
