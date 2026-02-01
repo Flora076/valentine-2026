@@ -52,7 +52,7 @@ window.addEventListener('DOMContentLoaded', () => {
     question1Text.textContent = config.questions.first.text;
 
     const yesBtn1 = document.getElementById('yesBtn1');
-    yesBtn1.textContent = config.questions.first.yesBtn;
+    yesBtn1.textContent = config.questions.first.yesBtn1;
     yesBtn1.onclick = () => showNextQuestion(2); 
     
     // --- Question 2 Setup ---
@@ -60,11 +60,11 @@ window.addEventListener('DOMContentLoaded', () => {
     question2Text.textContent = config.questions.second.text;
 
     const yesBtn2 = document.getElementById('yesBtn2');
-    yesBtn2.textContent = config.questions.second.yesBtn; // Fixed from startText
+    yesBtn2.textContent = config.questions.second.yesBtn2; 
     yesBtn2.onclick = celebrate; 
 
     const noBtn2 = document.getElementById('noBtn2');
-    noBtn2.textContent = config.questions.second.noBtn;
+    noBtn2.textContent = config.questions.second.noBtn2;
     makeButtonRunAway(noBtn2);
 
     // Start background elements
@@ -140,6 +140,11 @@ function setRandomPosition(element) {
 }
 
 function celebrate() {    
+    document.querySelectorAll('.question-section').forEach(q => q.classList.add('hidden'));
+    const celebration = document.getElementById('celebration');
+    celebration.classList.remove('hidden');
+    
+     // Set celebration messages
     document.getElementById('celebrationTitle').textContent = config.celebration.title;
     document.getElementById('celebrationMessage').textContent = config.celebration.message;
     document.getElementById('celebrationEmojis').textContent = config.celebration.emojis;
