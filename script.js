@@ -84,6 +84,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Create initial floating elements
     createFloatingElements();
+    
 // Attach runaway behavior ONLY to question 2 "No"
  const noBtn2 = document.getElementById('noBtn2');
 makeButtonRunAway(noBtn2);
@@ -123,8 +124,6 @@ function setRandomPosition(element) {
     element.style.pointerEvents = 'none';
 }
 
-// Initialize hearts after DOM is loaded
-window.addEventListener('DOMContentLoaded', createFloatingElements);
 
 
 // Function to show next question
