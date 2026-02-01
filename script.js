@@ -124,50 +124,39 @@ function moveButton(button) {
     button.style.left = x + 'px';
     button.style.top = y + 'px';
 }
+// make no button run away
+function makeButtonRunAway(button) {
+    document.addEventListener('mousemove', (e) => {
+        const rect = button.getBoundingClientRect();
 
-// Love meter functionality
-const loveMeter = document.getElementById('loveMeter');
-const loveValue = document.getElementById('loveValue');
-const extraLove = document.getElementById('extraLove');
+        const btnX = rect.left + rect.width / 2;
+        const btnY = rect.top + rect.height / 2;
 
-function setInitialPosition() {
-    loveMeter.value = 100;
-    loveValue.textContent = 100;
-    loveMeter.style.width = '100%';
+        const dx = e.clientX - btnX;
+        const dy = e.clientY - btnY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < 120) {
+            const moveX = -dx * 0.8;
+            const moveY = -dy * 0.8;
+
+            let newLeft = rect.left + moveX;
+            let newTop = rect.top + moveY;
+
+            // Keep button inside screen
+            newLeft = Math.max(0, Math.min(window.innerWidth - rect.width, newLeft));
+            newTop = Math.max(0, Math.min(window.innerHeight - rect.height, newTop));
+
+            button.style.position = 'fixed';
+            button.style.left = `${newLeft}px`;
+            button.style.top = `${newTop}px`;
+        }
+    });
 }
 
-loveMeter.addEventListener('input', () => {
-    const value = parseInt(loveMeter.value);
-    loveValue.textContent = value;
-    
-    if (value > 100) {
-        extraLove.classList.remove('hidden');
-        const overflowPercentage = (value - 100) / 9900;
-        const extraWidth = overflowPercentage * window.innerWidth * 0.8;
-        loveMeter.style.width = `calc(100% + ${extraWidth}px)`;
-        loveMeter.style.transition = 'width 0.3s';
-        
-        // Show different messages based on the value
-        if (value >= 5000) {
-            extraLove.classList.add('super-love');
-            extraLove.textContent = config.loveMessages.extreme;
-        } else if (value > 1000) {
-            extraLove.classList.remove('super-love');
-            extraLove.textContent = config.loveMessages.high;
-        } else {
-            extraLove.classList.remove('super-love');
-            extraLove.textContent = config.loveMessages.normal;
-        }
-    } else {
-        extraLove.classList.add('hidden');
-        extraLove.classList.remove('super-love');
-        loveMeter.style.width = '100%';
-    }
-});
+const noBtn = document.getElementById('noBtn1');
+makeButtonRunAway(noBtn);
 
-// Initialize love meter
-window.addEventListener('DOMContentLoaded', setInitialPosition);
-window.addEventListener('load', setInitialPosition);
 
 // Celebration function
 function celebrate() {
