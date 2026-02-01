@@ -22,13 +22,13 @@ const CONFIG = {
     questions: {
         first: {
             text: "Do you looveee me?",                                    // First interaction
-            yesBtn1: "Yes",                                             // Text for "Yes" button
+            yesBtn1: "Yes ;)",                                             // Text for "Yes" button
         },
 
         second: {
             text: "Will you be my Valentine on February 14th? 🌹", // The big question!
-            yesBtn2: "Yes!",                                             // Text for "Yes" button
-            noBtn2: "No"                                                 // Text for "No" button
+            yesBtn2: "Yes! Duhh",                                             // Text for "Yes" button
+            noBtn2: "No D:"                                                 // Text for "No" button
         }
     },
 
