@@ -89,3 +89,28 @@ h1, h2 {
     color: var(--btn-hover);
     font-weight: bold;
 }
+
+/* The Text Explosion Animation */
+.explode-text {
+    animation: textPop 0.8s cubic-bezier(0.17, 0.89, 0.32, 1.49);
+    display: block;
+}
+
+@keyframes textPop {
+    0% {
+        transform: scale(0); /* Start invisible and tiny */
+        opacity: 0;
+    }
+    70% {
+        transform: scale(1.2); /* Grow slightly larger than normal */
+    }
+    100% {
+        transform: scale(1); /* Settle at normal size */
+        opacity: 1;
+    }
+}
+
+/* Ensure the celebration titles are centered and ready to animate */
+#celebrationTitle, #celebrationMessage {
+    transition: all 0.5s ease;
+}
