@@ -21,7 +21,7 @@ const CONFIG = {
     // Customize each question and its possible responses
     questions: {
         first: {
-            text: "Do you like me?",                                    // First interaction
+            text: "Do you looveee me?",                                    // First interaction
             yesBtn1: "Yes",                                             // Text for "Yes" button
             noBtn1: "No",                                               // Text for "No" button
         },
