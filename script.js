@@ -66,7 +66,7 @@ window.addEventListener('DOMContentLoaded', () => {
     question1Text.textContent = config.questions.first.text;
 
     const yesBtn1 = document.getElementById('yesBtn1');
-    yesBtn1.textContent = config.questions.first.yesBtn;
+    yesBtn1.textContent = config.questions.first.yesBtn1;
     yesBtn1.onclick = () => showNextQuestion(2); 
     
     // --- Second Question ---
@@ -74,11 +74,11 @@ window.addEventListener('DOMContentLoaded', () => {
     question2Text.textContent = config.questions.second.text;
 
     const yesBtn2 = document.getElementById('yesBtn2');
-    yesBtn2.textContent = config.questions.second.yesBtn; // Fixed variable name
+    yesBtn2.textContent = config.questions.second.yesBtn2; // Fixed variable name
     yesBtn2.onclick = celebrate; 
 
     const noBtn2 = document.getElementById('noBtn2');
-    noBtn2.textContent = config.questions.second.noBtn;
+    noBtn2.textContent = config.questions.second.noBtn2;
     makeButtonRunAway(noBtn2); // Attach runaway behavior
 
     // Create initial floating elements
