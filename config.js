@@ -22,25 +22,17 @@ const CONFIG = {
     questions: {
         first: {
             text: "Do you like me?",                                    // First interaction
-            yesBtn: "Yes",                                             // Text for "Yes" button
-            noBtn: "No",                                               // Text for "No" button
-            secretAnswer: "I don't like you, I love you! ❤️"           // Secret hover message
+            yesBtn1: "Yes",                                             // Text for "Yes" button
+            noBtn1: "No",                                               // Text for "No" button
         },
 
         second: {
             text: "Will you be my Valentine on February 14th? 🌹", // The big question!
-            yesBtn: "Yes!",                                             // Text for "Yes" button
-            noBtn: "No"                                                 // Text for "No" button
+            startText: "Yes!",                                             // Text for "Yes" button
+            noBtn2: "No"                                                 // Text for "No" button
         }
     },
 
-    // Love meter messages
-    // They show up depending on how far they slide the meter
-    loveMessages: {
-        extreme: "WOOOOW You love me that much?? 🥰🚀💝",  // Shows when they go past 5000%
-        high: "To infinity and beyond! 🚀💝",              // Shows when they go past 1000%
-        normal: "And beyond! 🥰"                           // Shows when they go past 100%
-    },
 
     // Messages that appear after they say "Yes!"
     celebration: {
