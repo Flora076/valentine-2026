@@ -21,6 +21,11 @@ function validateConfig() {
     if (parseFloat(config.animations.floatDuration) < 5) {
         config.animations.floatDuration = "5s";
     }
+    
+    if (config.animations.heartExplosionSize < 1 || config.animations.heartExplosionSize > 3) {
+        warnings.push("Heart explosion size should be between 1 and 3! Using default.");
+        config.animations.heartExplosionSize = 1.5;
+    }
 
     if (warnings.length > 0) {
         console.warn("⚠️ Configuration Warnings:", warnings);
