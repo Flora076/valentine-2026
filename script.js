@@ -117,24 +117,25 @@ function showNextQuestion(questionNumber) {
 
 // make no button run away
 function makeButtonRunAway(button) {
+    if (!button) return;
+
     document.addEventListener('mousemove', (e) => {
         const rect = button.getBoundingClientRect();
-
         const btnX = rect.left + rect.width / 2;
         const btnY = rect.top + rect.height / 2;
 
         const dx = e.clientX - btnX;
         const dy = e.clientY - btnY;
-        const distance = Math.sqrt(dx * dx + dy * dy);
+        const distance = Math.sqrt(dx*dx + dy*dy);
 
-        if (distance < 120) { // pixels
-            const moveX = -dx * 0.8;
-            const moveY = -dy * 0.8;
+        if (distance < 150) { // how close the mouse triggers the move
+            let moveX = -dx * 0.8;
+            let moveY = -dy * 0.8;
 
             let newLeft = rect.left + moveX;
             let newTop = rect.top + moveY;
 
-            // Keep button inside screen
+            // Keep inside window bounds
             newLeft = Math.max(0, Math.min(window.innerWidth - rect.width, newLeft));
             newTop = Math.max(0, Math.min(window.innerHeight - rect.height, newTop));
 
