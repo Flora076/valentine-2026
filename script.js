@@ -59,7 +59,7 @@ window.addEventListener('DOMContentLoaded', () => {
     validateConfig();
 
     // Set texts from config
-    document.getElementById('valentineTitle').textContent = `${config.valentineName},...`;
+    document.getElementById('valentineTitle').textContent = `${config.valentineName},...mi Amor`;
     
     // Set first question texts
     document.getElementById('question1Text').textContent = config.questions.first.text;
@@ -154,9 +154,6 @@ function makeButtonRunAway(button) {
     });
 }
 
-const noBtn = document.getElementById('noBtn1');
-makeButtonRunAway(noBtn);
-
 
 // Celebration function
 function celebrate() {
@@ -197,7 +194,10 @@ function setupMusicPlayer() {
         musicControls.style.display = 'none';
         return;
     }
-
+    
+const noBtn = document.getElementById('noBtn1');
+makeButtonRunAway(noBtn);
+    
     // Set music source and volume
     musicSource.src = config.music.musicUrl;
     bgMusic.volume = config.music.volume || 0.5;
@@ -225,3 +225,4 @@ function setupMusicPlayer() {
         }
     });
 } 
+
