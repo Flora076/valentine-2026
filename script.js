@@ -43,7 +43,7 @@ function getDefaultColor(key) {
     const defaults = {
         backgroundStart: "#308a58",
         backgroundEnd: "#487d60",
-        buttonBackground: "#ff6b6b",
+        buttonBackground: "#3aab2b",
         buttonHover: "#317a52",
         textColor: "#10de6c"
     };
@@ -70,7 +70,7 @@ window.addEventListener('DOMContentLoaded', () => {
     // Set second question texts
     document.getElementById('question2Text').textContent = config.questions.second.text;
     document.getElementById('startText').textContent = config.questions.second.startText;
-    document.getElementById('nextBtn').textContent = config.questions.second.nextBtn;
+    document.getElementById('noBtn2').textContent = config.questions.second.noBtn;
 ;
 
     // Create initial floating elements
@@ -78,6 +78,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Setup music player
     setupMusicPlayer();
+});
+
+// Attach runaway behavior ONLY to question 2 "No"
+   const noBtn2 = document.getElementById('noBtn2');
+    makeButtonRunAway(noBtn2);
 });
 
 // Create floating hearts and bears
@@ -93,14 +98,7 @@ function createFloatingElements() {
         container.appendChild(div);
     });
 
-    // Create bears
-    config.floatingEmojis.bears.forEach(bear => {
-        const div = document.createElement('div');
-        div.className = 'bear';
-        div.innerHTML = bear;
-        setRandomPosition(div);
-        container.appendChild(div);
-    });
+
 }
 
 // Set random position for floating elements
